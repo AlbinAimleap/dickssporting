@@ -16,9 +16,9 @@ def split_and_save_csv(input_file, output_dir, chunk_size):
         output_file = f'{input_file.stem}_chunk_{i+1}.csv'
         chunk.to_csv(output_path / output_file, index=False)
 
-def build_docker_compose():
+def build_docker_compose(output_dir):
   docker_compose_file = Path(__file__).parent / 'docker-compose.yml'
-  input_files_dir = Path(__file__).parent / 'input_files'
+  input_files_dir = Path(__file__).parent / output_dir
   chunk_files = list(input_files_dir.glob('*.csv'))
 
   services = {  
@@ -48,7 +48,7 @@ def build_docker_compose():
           'container_name': f'scraper_container_{i}',
           'environment': [
               'PYTHONUNBUFFERED=1',
-              f'INPUT_FILE=/usr/src/app/input_files/{chunk_file.name}'
+              f'INPUT_FILE=/usr/src/app/{output_dir}/{chunk_file.name}'
           ]
       }
 
@@ -58,14 +58,13 @@ def build_docker_compose():
 def parse_arguments():
     parser = argparse.ArgumentParser(description='Split and save CSV file.')
     parser.add_argument('-I', '--input-file', required=True, help='Path to the input CSV file.')
-    parser.add_argument('-O', '--output-dir', required=True, help='Path to the output directory.')
     parser.add_argument('-C', '--chunk-size', type=int, default=5000, help='Size of each chunk.')
     return parser.parse_args()
 
 def main():
     args = parse_arguments()
     split_and_save_csv(args.input_file, args.output_dir, args.chunk_size)
-    build_docker_compose()
+    build_docker_compose(args.output_dir,)
 
 if __name__ == "__main__":
     main()
