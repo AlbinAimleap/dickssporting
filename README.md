@@ -30,17 +30,11 @@ docker-compose up
 - `-I, --input-file`: Path to the input CSV file containing product URLs (required)
 
 ## Setup
+1. Set up the configuration in `config.py` (ensure this file exists with necessary constants like `CONCURRENCY`, `TIMEOUT`, `COOKIE_FILE`, `OUTPUT_FILE`, and `HEADERS`).
 
-1. Install the required dependencies:
-   ```bash
-   pip install pandas pyyaml tls_client asyncio
-   ```
+2. Run `split_and_save.py` to prepare the input data and Docker Compose file.
 
-2. Set up the configuration in `config.py` (ensure this file exists with necessary constants like `CONCURRENCY`, `TIMEOUT`, `COOKIE_FILE`, `OUTPUT_FILE`, and `HEADERS`).
-
-3. Run `split_and_save.py` to prepare the input data and Docker Compose file.
-
-4. Run `docker-compose up` to start the scraping process.
+3. Run `docker-compose up` to start the scraping process.
 
 ## Output
 
