@@ -27,8 +27,6 @@ This script performs the actual scraping of product data from Dick's Sporting Go
 docker-compose up
 ```
 
-- `-I, --input-file`: Path to the input CSV file containing product URLs (required)
-
 ## Setup
 
 1. Install the required dependencies:
