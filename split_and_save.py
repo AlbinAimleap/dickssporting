@@ -59,6 +59,7 @@ def parse_arguments():
     parser = argparse.ArgumentParser(description='Split and save CSV file.')
     parser.add_argument('-I', '--input-file', required=True, help='Path to the input CSV file.')
     parser.add_argument('-C', '--chunk-size', type=int, default=5000, help='Size of each chunk.')
+    parser.add_argument('-O', '--output-dir', required=True, help='Path to the output directory.')
     return parser.parse_args()
 
 def main():

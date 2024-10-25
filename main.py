@@ -192,6 +192,7 @@ def parse_arguments():
     parser = argparse.ArgumentParser(description='Process URLs from a CSV file.')
     parser.add_argument('-I', '--input-file', required=True, help='Path to the input CSV file.')
     return parser.parse_args()
+    
         
 async def main():
     args = parse_arguments()
