@@ -3,6 +3,7 @@ import asyncio
 import pandas as pd
 import json
 import logging
+from logging.handlers import RotatingFileHandler
 import os
 import subprocess
 import sys
@@ -13,6 +14,13 @@ from pathlib import Path
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
+
+
+log_file_path = Path(__file__).resolve().parent / 'scraper.log'
+file_handler = RotatingFileHandler(log_file_path, maxBytes=10*1024*1024, backupCount=5)
+file_handler.setLevel(logging.INFO)
+file_handler.setFormatter(logging.Formatter('%(asctime)s - %(levelname)s - %(message)s'))
+logger.addHandler(file_handler)
 
 semaphore = asyncio.Semaphore(Config.CONCURRENCY)
 timeout = asyncio.Semaphore(Config.TIMEOUT)
