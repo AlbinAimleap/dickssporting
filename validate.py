@@ -1,1 +1,1 @@
-print("Some validation")
+print("Some validations")
